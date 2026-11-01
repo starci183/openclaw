@@ -304,6 +304,10 @@ export function buildQaGatewayConfig(params: {
       // file, image, memory, and subagent tools even when the surrounding
       // environment defaults to a messaging-only profile.
       profile: "coding",
+      // Runtime-tool parity probes intentionally exercise matching-context
+      // workspace escapes. Contain every QA filesystem surface so those probes
+      // verify rejection instead of mutating the fixture sentinel.
+      fs: { workspaceOnly: true },
     },
     ...(transportPluginIds.includes("qa-channel")
       ? {

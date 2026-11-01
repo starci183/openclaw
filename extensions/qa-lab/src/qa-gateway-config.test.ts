@@ -29,6 +29,13 @@ function createQaChannelTransportParams(baseUrl = "http://127.0.0.1:43124") {
 }
 
 describe("buildQaGatewayConfig", () => {
+  it("contains runtime filesystem tools to the QA workspace", () => {
+    expect(buildConfig({}).tools).toMatchObject({
+      profile: "coding",
+      fs: { workspaceOnly: true },
+    });
+  });
+
   it.each([
     {
       scenarioId: "anthropic-thinking-error-recovery-replay-safe-read",
